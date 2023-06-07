@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
+import kr.binarybard.loginplayground.authentication.service.EmailConfirmationService;
 import kr.binarybard.loginplayground.config.exception.DuplicateMemberException;
 import kr.binarybard.loginplayground.member.dto.SignUpRequest;
 import kr.binarybard.loginplayground.member.service.MemberService;
@@ -21,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MemberController {
 	private final MemberService memberService;
+	private final EmailConfirmationService emailConfirmationService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -41,13 +43,38 @@ public class MemberController {
 			return "sign-up";
 		}
 
+		boolean isMemberSaved = saveNewMember(request, bindingResult);
+		if (!isMemberSaved) {
+			return "sign-up";
+		}
+
+		boolean isConfirmationEmailSent = sendConfirmationEmail(request.getEmail(), bindingResult);
+		if (!isConfirmationEmailSent) {
+			return "sign-up";
+		}
+
+		return "redirect:/members/login";
+	}
+
+	private boolean saveNewMember(SignUpRequest request, BindingResult bindingResult) {
 		try {
 			memberService.save(request);
+			return true;
 		} catch (DuplicateMemberException e) {
 			log.trace("Failed to create account", e);
 			bindingResult.reject("exists.email");
-			return "sign-up";
+			return false;
 		}
-		return "redirect:/members/login";
+	}
+
+	private boolean sendConfirmationEmail(String email, BindingResult bindingResult) {
+		try {
+			emailConfirmationService.sendConfirmationEmail(email);
+			return true;
+		} catch (Exception e) {
+			log.error("Failed to send confirmation email", e);
+			bindingResult.reject("email.send.error");
+			return false;
+		}
 	}
 }
