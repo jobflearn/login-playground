@@ -7,7 +7,9 @@
 <h2>Sign Up</h2>
 <form action="#" th:action="@{/members/signup}" method="post" th:object="${member}" th:validate="true">
     <input type="text" th:field="*{email}" placeholder="Email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></span>
     <input type="password" th:field="*{password}" placeholder="Password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></span>
     <button type="submit">Sign Up</button>
 </form>
 </body>
