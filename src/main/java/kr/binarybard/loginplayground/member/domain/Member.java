@@ -24,6 +24,9 @@ public class Member extends BaseTimeEntity {
 	@Column(nullable = false)
 	private String password;
 
+	@Column(nullable = false)
+	private boolean confirmed;
+
 	public Member(String email, String password) {
 		this.email = email;
 		this.password = password;
@@ -31,5 +34,9 @@ public class Member extends BaseTimeEntity {
 
 	public void encodePassword(PasswordEncoder passwordEncoder) {
 		this.password = passwordEncoder.encode(this.password);
+	}
+
+	public void confirm() {
+		this.confirmed = true;
 	}
 }

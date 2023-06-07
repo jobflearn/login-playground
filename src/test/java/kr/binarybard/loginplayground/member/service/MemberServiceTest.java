@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import kr.binarybard.loginplayground.exception.DuplicateMemberException;
+import kr.binarybard.loginplayground.config.exception.DuplicateMemberException;
 import kr.binarybard.loginplayground.member.domain.Member;
 import kr.binarybard.loginplayground.member.dto.SignUpRequest;
 import kr.binarybard.loginplayground.member.repository.MemberRepository;

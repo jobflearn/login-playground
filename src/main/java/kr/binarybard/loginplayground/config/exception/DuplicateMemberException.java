@@ -1,4 +1,4 @@
-package kr.binarybard.loginplayground.exception;
+package kr.binarybard.loginplayground.config.exception;
 
 public class DuplicateMemberException extends RuntimeException {
 
