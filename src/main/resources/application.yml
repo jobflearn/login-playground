@@ -11,8 +11,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: songgang1334@gmail.com
-    password: oghxdlcjdlnubnws
+    username: ENC(MAQBwhpn0DaSYyZyzY3wv/8UTRIpmvwneJKXW7C7hgs=)
+    password: ENC(7htD8P8ePu32cJL0D8SZfyzWodoqaKGhzULqHy6ZRxY=)
     properties:
       mail:
         smtp:
@@ -20,3 +20,8 @@ spring:
           starttls:
             enable: true
             required: true
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
