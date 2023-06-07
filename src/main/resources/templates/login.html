@@ -2,19 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<h2>Login</h2>
-<form action="#" th:action="@{/members/login}" method="post">
-    <input type="text" th:name="email" placeholder="email">
-    <input type="password" th:name="password" placeholder="Password">
-    <button type="submit">Login</button>
-</form>
+<div class="container">
+    <h2>Login</h2>
+    <form action="#" th:action="@{/members/login}" method="post">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" th:name="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" th:name="password" placeholder="Password">
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Login</button>
 
-<!-- Adding a button for navigation to Sign Up page -->
-<button onclick="location.href='/members/signup'" type="button">Sign Up</button>
+            <!-- Adding a button for navigation to Sign Up page -->
+            <button onclick="location.href='/members/signup'" type="button" class="btn btn-primary">Sign Up</button>
+        </div>
+    </form>
 
-<!-- If there's an error during login, it will be displayed here -->
-<p th:if="${param.error}" th:text="#{invalid.login}" style="color: red;">Invalid username or password.</p>
+    <!-- If there's an error during login, it will be displayed here -->
+    <p th:if="${param.error}" th:text="#{invalid.login}" class="text-danger">Invalid username or password.</p>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@ public class MemberController {
 		try {
 			memberService.save(request);
 		} catch (DataIntegrityViolationException e) {
-			log.error("Failed to create account", e);
+			log.trace("Failed to create account", e);
 			bindingResult.reject("exists.email");
 			return "sign-up";
 		}
