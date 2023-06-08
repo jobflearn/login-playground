@@ -4,8 +4,6 @@ import static kr.binarybard.loginplayground.utils.ConvertUtils.*;
 
 import java.util.Map;
 
-import kr.binarybard.loginplayground.utils.ConvertUtils;
-
 public class KakaoOAuth2UserInfo extends CustomOAuth2UserInfo {
 
 	protected KakaoOAuth2UserInfo(Map<String, Object> attributes) {

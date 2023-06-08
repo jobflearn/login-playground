@@ -45,6 +45,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	}
 
 	private String createDummyPassword() {
-		return UUID.randomUUID().toString().substring(0, 8);
+		return UUID.randomUUID().toString().replace("-", "");
 	}
 }

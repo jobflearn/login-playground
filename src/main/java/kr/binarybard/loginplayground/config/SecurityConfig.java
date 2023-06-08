@@ -49,8 +49,6 @@ public class SecurityConfig {
 			.sessionManagement(session -> session
 				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
 			.oauth2Login(oauth2 -> oauth2
-				.loginPage("/members/login")
-					.defaultSuccessUrl("/", true)
 				.userInfoEndpoint(userInfo -> userInfo
 					.userService(customOAuth2UserService))
 				.authorizationEndpoint(authorization -> authorization

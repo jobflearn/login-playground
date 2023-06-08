@@ -2,6 +2,8 @@ package kr.binarybard.loginplayground.config.oauth.userinfo;
 
 import java.util.Map;
 
+import kr.binarybard.loginplayground.config.exception.UnsupportedOAuth2ProviderException;
+
 public abstract class CustomOAuth2UserInfo {
 	protected final Map<String, Object> attributes;
 
@@ -50,7 +52,7 @@ public abstract class CustomOAuth2UserInfo {
 		if (CustomOAuth2Provider.KAKAO.equalsWith(registrationId)) {
 			return new KakaoOAuth2UserInfo(attributes);
 		} else {
-			throw new IllegalArgumentException(String.format("프로바이더 [%s]는 지원하지 않습니다.", registrationId));
+			throw new UnsupportedOAuth2ProviderException(registrationId);
 		}
 	}
 }
