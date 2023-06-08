@@ -34,7 +34,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests(
 				auth -> auth
 					.requestMatchers(toH2Console()).permitAll()
-					.requestMatchers("/members/login", "/members/signup", "/confirm").permitAll()
+					.requestMatchers("/members/login", "/members/signup").permitAll()
 					.anyRequest().authenticated()
 			)
 			.headers(headers -> headers
