@@ -6,19 +6,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import kr.binarybard.loginplayground.config.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+	private final CustomOAuth2UserService customOAuth2UserService;
 
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
@@ -34,7 +35,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests(
 				auth -> auth
 					.requestMatchers(toH2Console()).permitAll()
-					.requestMatchers("/members/login", "/members/signup").permitAll()
+					.requestMatchers("/members/**").permitAll()
 					.anyRequest().authenticated()
 			)
 			.headers(headers -> headers
@@ -47,6 +48,16 @@ public class SecurityConfig {
 				.logoutSuccessUrl("/"))
 			.sessionManagement(session -> session
 				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+			.oauth2Login(oauth2 -> oauth2
+				.loginPage("/members/login")
+					.defaultSuccessUrl("/", true)
+				.userInfoEndpoint(userInfo -> userInfo
+					.userService(customOAuth2UserService))
+				.authorizationEndpoint(authorization -> authorization
+					.baseUri("/members/login/oauth2/authorize"))
+				.redirectionEndpoint(redirection -> redirection
+					.baseUri("/members/login/oauth2/code/{code}"))
+			)
 			.build();
 	}
 }
