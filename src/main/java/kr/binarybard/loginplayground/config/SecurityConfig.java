@@ -47,15 +47,17 @@ public class SecurityConfig {
 			.logout(logout -> logout
 				.logoutSuccessUrl("/"))
 			.sessionManagement(session -> session
-				.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+				.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
 			.oauth2Login(oauth2 -> oauth2
 				.userInfoEndpoint(userInfo -> userInfo
 					.userService(customOAuth2UserService))
 				.authorizationEndpoint(authorization -> authorization
 					.baseUri("/members/login/oauth2/authorize"))
 				.redirectionEndpoint(redirection -> redirection
-					.baseUri("/members/login/oauth2/code/{code}"))
-			)
+					.baseUri("/members/login/oauth2/code/{code}")))
+			.rememberMe(remember -> remember
+				.tokenValiditySeconds(60 * 60 * 24 * 7)
+				.key("remember-me"))
 			.build();
 	}
 }
