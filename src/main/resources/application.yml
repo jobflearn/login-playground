@@ -8,18 +8,6 @@ spring:
     url: jdbc:h2:mem:test
     username: sa
     password:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ENC(MAQBwhpn0DaSYyZyzY3wv/8UTRIpmvwneJKXW7C7hgs=)
-    password: ENC(7htD8P8ePu32cJL0D8SZfyzWodoqaKGhzULqHy6ZRxY=)
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
   security:
     oauth2:
       client:
