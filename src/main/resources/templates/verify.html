@@ -98,8 +98,8 @@
       <input type="text" maxlength="1" pattern="^[a-zA-Z0-9]$" class="form-control code-input" id="code4" name="code4" required>
       <input type="text" maxlength="1" pattern="^[a-zA-Z0-9]$" class="form-control code-input" id="code5" name="code5" required>
       <input type="text" maxlength="1" pattern="^[a-zA-Z0-9]$" class="form-control code-input" id="code6" name="code6" required>
-      <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}" class="text-danger"></span>
     </div>
+    <span th:if="${error}" th:text="${error}" class="text-danger d-block text-center mb-3"></span>
     <div class="d-flex justify-content-between">
       <button type="submit" class="btn btn-primary">Verify</button>
       <button onclick="location.href='/members/signup'" type="button"
