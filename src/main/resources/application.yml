@@ -13,8 +13,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: ENC(Jl5Kx2JGleyP9Udj9B8GvNzzFtI/HEGBOwAEbtVS9W2fvoKjpM0eHIns8RMWfLLm)
-            redirect-uri: http://localhost:8080/members/login/oauth2/code/kakao
+            client-id: ENC(o1309Z71MOOhCdlgCjmgyNGw9CKuIB1RIzkO0ToqSCJbgOIaxZNfD40POQZks7uU)
+            redirect-uri: ENC(CJ9I/fsHptAbjcSHfwpl75LvrkyEca0AJXROIbX8IOB/YwFxXtgfYP37p0oOJ33TiONOJ10yBHCZ8tFqSaFlolnSxy+nU32G)
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             client-name: Kakao
@@ -31,3 +31,4 @@ jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    password: ${JASYPT_PASSWORD}
