@@ -11,4 +11,5 @@ jobs:
         uses: nikitasavinov/checkstyle-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          reviewdog_token: ${{ secrets.REVIEWDOG_TOKEN }}
           reporter: 'github-pr-review'
